@@ -36,29 +36,61 @@
   </view>
 
   <!-- 商品列表 -->
-  <view class="m-top20">
-    <view class="checkout_list " wx:for="{{goods_list}}" wx:key="this">
-      <navigator url="../goods/index?goods_id={{item.goods_id}}">
-        <view class="dis-flex flow-shopList" data-index="{{index}}">
-          <view class="flow-list-left">
-            <image mode="scaleToFill" src="{{item.image[0].file_path}}"></image>
-          </view>
-          <view class="flow-list-right">
-            <text class="f-30 col-3 twolist-hidden">{{item.goods_name}}</text>
-            <text class="f-26 col-7">{{item.goods_sku.goods_attr}}</text>
-            <view class="flow-list-cont">
-              <text class="flow-cont">￥{{item.goods_price}}</text>
-              <text class="small">×{{item.total_num}}</text>
+  <view wx:if="{{goods_list.length > 1}}">
+    <view class="m-top20" wx:for="{{goods_list}}" wx:for-index="idx" wx:for-item="g_list">
+      <text class="flow-num-box b-f padding-box">订单{{idx+1}}</text>
+      <view class="checkout_list " wx:for="{{g_list.goods_list}}" wx:key="this">
+        <navigator url="../goods/index?goods_id={{item.goods_id}}">
+          <view class="dis-flex flow-shopList" data-index="{{index}}">
+            <view class="flow-list-left">
+              <image mode="scaleToFill" src="{{item.image[0].file_path}}"></image>
+            </view>
+            <view class="flow-list-right">
+              <text class="f-30 col-3 twolist-hidden">{{item.goods_name}}</text>
+              <text class="f-26 col-7">{{item.goods_sku.goods_attr}}</text>
+              <view class="flow-list-cont">
+                <text class="flow-cont">￥{{item.goods_price}}</text>
+                <text class="small">×{{item.total_num}}</text>
+              </view>
             </view>
           </view>
-        </view>
-      </navigator>
+        </navigator>
+      </view>
+      <view class="flow-num-box b-f padding-box">
+        <text>共{{g_list.total_num}}件商品，合计：</text>
+        <text class="flow-money col-m">￥{{g_list.total_price}}</text>
+        <!--<text>运费：</text>-->
+        <!--<text class="flow-money col-m">￥{{g_list.express_price}}</text>-->
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="m-top20">
+      <view class="checkout_list " wx:for="{{goods_list}}" wx:key="this">
+        <navigator url="../goods/index?goods_id={{item.goods_id}}">
+          <view class="dis-flex flow-shopList" data-index="{{index}}">
+            <view class="flow-list-left">
+              <image mode="scaleToFill" src="{{item.image[0].file_path}}"></image>
+            </view>
+            <view class="flow-list-right">
+              <text class="f-30 col-3 twolist-hidden">{{item.goods_name}}</text>
+              <text class="f-26 col-7">{{item.goods_sku.goods_attr}}</text>
+              <view class="flow-list-cont">
+                <text class="flow-cont">￥{{item.goods_price}}</text>
+                <text class="small">×{{item.total_num}}</text>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </view>
     </view>
     <view class="flow-num-box b-f padding-box">
       <text>共{{order_total_num}}件商品，合计：</text>
       <text class="flow-money col-m">￥{{order_total_price}}</text>
     </view>
   </view>
+
+
 
   <!-- 商品金额 -->
   <view class="flow-all-money b-f padding-box m-top20">

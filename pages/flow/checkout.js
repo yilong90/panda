@@ -55,6 +55,11 @@ Page({
         _this.data.error = result.data.error_msg;
         App.showError(_this.data.error);
       }
+      // 显示提示拆单信息
+      if (result.data.goods_list.length > 1) {
+        console.log(result.data.goods_list)
+          App.showError('所选商品存在于不同仓库，将会拆单处理');
+      }
       _this.setData(result.data);
     };
 
