@@ -16,12 +16,19 @@ App({
   onLaunch: function() {
     // 设置api地址
     this.setApiRoot();
+    if(!this.getUserId()) {
+      this.doLogin();
+    }
+
   },
 
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow
    */
   onShow: function(options) {
+    // if(!this.getUserId()) {
+    //   this.doLogin();
+    // }
     // 获取小程序基础信息
     this.getWxappBase(function(wxapp) {
       // 设置navbar标题、颜色
@@ -75,6 +82,12 @@ App({
     return wx.getStorageSync('user_id');
   },
 
+  /**
+     * 当前用户all_info
+     */
+  getUserInfo: function () {
+    return wx.getStorageSync('user_all_info');
+  },
   /**
    * 显示成功提示框
    */
