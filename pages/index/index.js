@@ -19,9 +19,11 @@ Page({
   },
 
   onLoad: function() {
-    // 设置页面标题
-    App.setTitle();
+      // 设置页面标题
+      App.setTitle();
+  },
 
+  onShow: function() {
     // 获取首页数据
     this.getIndexData();
   },
