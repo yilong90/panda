@@ -66,7 +66,7 @@
   </view>
   <view wx:else>
     <view class="m-top20">
-      <view class="checkout_list " wx:for="{{goods_list}}" wx:key="this">
+      <view class="checkout_list " wx:for="{{goods_list[0]['goods_list']}}" wx:key="this">
         <navigator url="../goods/index?goods_id={{item.goods_id}}">
           <view class="dis-flex flow-shopList" data-index="{{index}}">
             <view class="flow-list-left">
