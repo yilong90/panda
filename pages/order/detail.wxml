@@ -52,25 +52,55 @@
       </view>
     </view>
 
-    <view class="padding-box b-f">
-      <view bindtap="goodsDetail" class="dis-flex flow-shopList b-f" data-id="{{item.goods_id}}" wx:for="{{order.goods}}" wx:key="this">
-        <view class="flow-list-left">
-          <image mode="scaleToFill" src="{{item.image.file_path}}"></image>
+    <view wx:if="{{order.goods.length > 1}}">
+      <view class="padding-box m-top20 b-f" wx:for="{{order.goods}}" wx:for-index="idx" wx:for-item="g_list">
+        <!--<view class="order-cont b-f m-top20">-->
+        <text class="flow-num-box padding-box">订单{{idx+1}}</text>
+        <!--</view>-->
+        <view bindtap="goodsDetail" class="dis-flex flow-shopList b-f" data-id="{{item.goods_id}}" wx:for="{{g_list.goods}}" wx:key="this">
+          <view class="flow-list-left">
+            <image mode="scaleToFill" src="{{item.image.file_path}}"></image>
+          </view>
+          <view class="flow-list-right">
+            <text class="h4 twolist-hidden">{{item.goods_name}}</text>
+            <text class="p f-22 col-7">{{item.goods_attr}}</text>
+            <view class="flow-list-cont">
+              <text class="flow-cont">￥{{item.goods_price}}</text>
+              <text class="small">×{{item.total_num}}</text>
+            </view>
+          </view>
         </view>
-        <view class="flow-list-right">
-          <text class="h4 twolist-hidden">{{item.goods_name}}</text>
-          <text class="p f-22 col-7">{{item.goods_attr}}</text>
-          <view class="flow-list-cont">
-            <text class="flow-cont">￥{{item.goods_price}}</text>
-            <text class="small">×{{item.total_num}}</text>
+        <view class="select b-f">
+          <view class="flow-num-box b-f">共{{g_list.total_num}}件商品，合计：
+            <text class="flow-money">{{g_list.total_price}}</text>
           </view>
         </view>
       </view>
-    </view>
 
-    <view class="select b-f">
-      <view class="flow-num-box b-f">共{{order.goods.length}}件商品，合计：
-        <text class="flow-money">{{order.total_price}}</text>
+
+      <!--单订单-->
+    </view>
+    <view wx:else>
+      <view class="padding-box b-f">
+        <view bindtap="goodsDetail" class="dis-flex flow-shopList b-f" data-id="{{item.goods_id}}" wx:for="{{order.goods[0]}}" wx:key="this">
+          <view class="flow-list-left">
+            <image mode="scaleToFill" src="{{item.image.file_path}}"></image>
+          </view>
+          <view class="flow-list-right">
+            <text class="h4 twolist-hidden">{{item.goods_name}}</text>
+            <text class="p f-22 col-7">{{item.goods_attr}}</text>
+            <view class="flow-list-cont">
+              <text class="flow-cont">￥{{item.goods_price}}</text>
+              <text class="small">×{{item.total_num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="select b-f">
+        <view class="flow-num-box b-f">共{{order.goods[0].length}}件商品，合计：
+          <text class="flow-money">{{order.total_price}}</text>
+        </view>
       </view>
     </view>
 

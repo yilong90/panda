@@ -44,7 +44,7 @@
                     </view>
                   </view>
                   <view class="right p-r">
-                    <text class="goods-number">共{{item.goods.length}}件</text>
+                    <text class="goods-number">共{{item.total_num}}件</text>
                     <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
                   </view>
                 </view>
